@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Student Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eef1f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: #007bff;
+            color: white;
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 500;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        .form-container {
+            width: 40%;
+            margin: 40px auto;
+            background-color: white;
+            padding: 25px 30px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.15);
+            border-radius: 8px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: 500;
+            color: #444;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 6px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            margin-top: 25px;
+            background-color: #28a745;
+            color: white;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ✅ NAVBAR -->
+    <div class="navbar">
+        <div class="logo">Student App</div>
+        <div>
+            <a th:href="@{/}">Home</a>
+            <a th:href="@{/add}">Add Student</a>
+        </div>
+    </div>
+
+    <!-- ✅ FORM -->
+    <div class="form-container">
+        <h2 th:text="${student.rollNo} != null ? 'Update Student' : 'Add New Student'"></h2>
+
+        <form th:action="@{/save}" th:object="${student}" method="post">
+
+            <!-- Hidden field for rollNo to support update -->
+            <input type="hidden" th:field="*{rollNo}" />
+
+            <label for="name">Name:</label>
+            <input type="text" th:field="*{name}" id="name" required />
+
+            <label for="studentClass">Class:</label>
+            <input type="text" th:field="*{studentClass}" id="studentClass" required />
+
+            <label for="gender">Gender:</label>
+            <select th:field="*{gender}" id="gender" required>
+                <option th:value="MALE">Male</option>
+                <option th:value="FEMALE">Female</option>
+                <option th:value="OTHER">Other</option>
+            </select>
+
+            <label for="dob">Date of Birth:</label>
+            <input type="date" th:field="*{dob}" id="dob" required />
+
+            <button type="submit" class="submit-btn"
+                    th:text="${student.rollNo} != null ? 'Update' : 'Add'">
+                Add
+            </button>
+        </form>
+    </div>
+
+</body>
+</html>
