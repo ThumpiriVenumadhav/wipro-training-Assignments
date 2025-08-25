@@ -1,0 +1,28 @@
+<div class="movie-grid">
+  <mat-card *ngFor="let movie of movies" 
+            class="movie-card"
+            [ngClass]="{'top-rated': isTopRated(movie.rating)}">
+
+    <!-- Poster -->
+    <div class="poster-wrapper">
+      <img mat-card-image [src]="movie.poster" alt="{{movie.title}} poster" />
+    </div>
+
+    <!-- Title + Genre -->
+    <mat-card-header>
+      <mat-card-title>{{ movie.title }}</mat-card-title>
+      <mat-card-subtitle>{{ movie.genre }}</mat-card-subtitle>
+    </mat-card-header>
+
+    <!-- Description + Rating -->
+    <mat-card-content>
+      <p>{{ movie.description }}</p>
+      <div class="rating">
+        <mat-icon *ngFor="let star of [].constructor(5); let i = index">
+          {{ i < movie.rating ? 'star' : 'star_border' }}
+        </mat-icon>
+      </div>
+    </mat-card-content>
+
+  </mat-card>
+</div>

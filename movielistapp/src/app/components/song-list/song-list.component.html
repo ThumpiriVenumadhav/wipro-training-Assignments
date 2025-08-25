@@ -1,0 +1,31 @@
+<h1 class="app-title">🎶 Music App</h1>
+
+<div class="song-grid">
+  <mat-card *ngFor="let song of songs" class="song-card">
+    
+    <!-- Album Art -->
+    <div class="album-wrapper">
+      <img mat-card-image [src]="song.albumArt" alt="{{ song.title }} album cover" />
+    </div>
+
+    <!-- Title + Artist -->
+    <mat-card-header>
+      <mat-card-title>{{ song.title }}</mat-card-title>
+      <mat-card-subtitle>{{ song.artist }}</mat-card-subtitle>
+    </mat-card-header>
+
+    <!-- Description -->
+    <mat-card-content>
+      <p><strong>Genre:</strong> {{ song.genre }}</p>
+      <p><strong>Rating:</strong> ⭐ {{ song.rating }}/5</p>
+      <p>{{ song.description }}</p>
+    </mat-card-content>
+
+    <!-- Play Button -->
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="playSong(song)">
+        ▶️ Play
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
